@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@tresjs/core": "^3.7.0",
+    "three": "^0.161.0"
+  }
+}
