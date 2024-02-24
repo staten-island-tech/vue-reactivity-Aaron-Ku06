@@ -1,0 +1,69 @@
+<template>
+    <div>
+        <canvas ref="canvas"></canvas>
+    </div>
+</template>
+
+<script setup>
+
+import * as THREE from 'three';
+import { ref, onMounted } from "vue"
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+
+const canvas = ref(null)
+
+onMounted(()=>{
+        
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+    const ambient = new THREE.AmbientLight( "#b0b0b0", 10 ); // soft white light
+    scene.add(ambient)
+    
+    const renderer = new THREE.WebGLRenderer({canvas: canvas.value});
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    
+    // const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+    // const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    // const cube = new THREE.Mesh( geometry, material );
+    // scene.add( cube );
+    
+    const controls = new OrbitControls( camera, canvas.value ) // ! Added orbit controls - allow panning
+    const gltfLoader = new GLTFLoader()
+    gltfLoader.load(
+        "Milotic.glb",
+        (gltf)=>{
+            gltf.scene.traverse((child) => {
+                if (child.isMesh) {
+                    child.material = new THREE.MeshStandardMaterial({
+                        // Set the properties you need
+                        color: 0xffffff,
+                        metalness: 0.5,
+                        roughness: 0.5
+                    });
+                }
+            });
+
+            // Add the model to your scene
+            scene.add(gltf.scene);
+        }
+    )
+
+
+    camera.position.z = 5;
+    
+    function animate() {
+        requestAnimationFrame( animate );
+
+        // cube.rotation.x += 0.01;
+        // cube.rotation.y += 0.01;
+
+        renderer.render( scene, camera );
+    }
+
+    animate();
+
+})
+
+
+</script>
