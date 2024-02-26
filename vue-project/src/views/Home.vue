@@ -17,16 +17,15 @@ onMounted(()=>{
         
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-    const ambient = new THREE.AmbientLight( "#b0b0b0", 10 ); // soft white light
-    scene.add(ambient)
-    
+   //  const ambient = new THREE.AmbientLight( "#b0b0b0", 10 ); // soft white light
+   // scene.add(ambient)
+    const directionalLight = new THREE.DirectionalLight( 0xffffff, 5 );
+    scene.add( directionalLight );
     const renderer = new THREE.WebGLRenderer({canvas: canvas.value});
     renderer.setSize( window.innerWidth, window.innerHeight );
     
-    // const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-    // const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-    // const cube = new THREE.Mesh( geometry, material );
-    // scene.add( cube );
+     const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+     const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
     
     const controls = new OrbitControls( camera, canvas.value ) // ! Added orbit controls - allow panning
     const gltfLoader = new GLTFLoader()
@@ -48,7 +47,24 @@ onMounted(()=>{
             scene.add(gltf.scene);
         }
     )
+    gltfLoader.load(
+        "Pokeball.glb",
+        (gltf)=>{
+            gltf.scene.traverse((child) => {
+                if (child.isMesh) {
+                    child.material = new THREE.MeshStandardMaterial({
+                        // Set the properties you need
+                        color: 0xffffff,
+                        metalness: 0.5,
+                        roughness: 0.5
+                    });
+                }
+            });
 
+            // Add the model to your scene
+            scene.add(gltf.scene);
+        }
+    )
 
     camera.position.z = 5;
     
