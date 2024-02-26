@@ -17,8 +17,8 @@ onMounted(()=>{
         
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-   //  const ambient = new THREE.AmbientLight( "#b0b0b0", 10 ); // soft white light
-   // scene.add(ambient)
+    const ambient = new THREE.AmbientLight( "#40E0D0", 3 ); // soft white light
+    scene.add(ambient)
     const directionalLight = new THREE.DirectionalLight( 0xffffff, 5 );
     scene.add( directionalLight );
     const renderer = new THREE.WebGLRenderer({canvas: canvas.value});
