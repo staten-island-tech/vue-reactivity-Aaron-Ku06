@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div>
         <canvas ref="canvas"></canvas>
     </div>
@@ -10,6 +10,7 @@ import * as THREE from 'three';
 import { ref, onMounted } from "vue"
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import Card from './Card.vue';
 
 const canvas = ref(null)
 
@@ -83,3 +84,44 @@ onMounted(()=>{
 
 
 </script>
+
+ -->
+
+
+
+
+
+
+
+
+<template>
+<div>
+    <Createcard
+    v-for="destination in cards"
+    :key="destination.name"
+    :Destination="destination"
+/>
+</div>
+</template>
+
+<script setup>
+import Createcard from '../components/Createcard.vue';
+const cards = [
+    {
+        Name: "Milotic",
+        Image: "",
+    },
+    {
+        Name: "Charizard",
+        Image: "",
+    },
+    {
+        Name: "Ninetails",
+        Image: "",
+    },
+];
+</script>
+
+<style lang="scss" scoped>
+
+</style>
