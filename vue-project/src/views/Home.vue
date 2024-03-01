@@ -106,18 +106,22 @@ onMounted(()=>{
 
 <script setup>
 import Createcard from '../components/Createcard.vue';
+import Milotic from '../components/Milotic.png'
+import Charizard from '../components/Charizard.png'
+import Ninetales from '../components/Ninetales.png'
+
 const cards = [
     {
         Name: "Milotic",
-        Image: "",
+        Image: Milotic,
     },
     {
         Name: "Charizard",
-        Image: "",
+        Image: Charizard,
     },
     {
-        Name: "Ninetails",
-        Image: "",
+        Name: "Ninetales",
+        Image: Ninetales,
     },
 ];
 </script>
