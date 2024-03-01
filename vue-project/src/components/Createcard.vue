@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>{{ Destination.name }}</h1>
-    <img :src="Destination.image" alt=""/>
+    <h1>{{ Destination.Name }}</h1>
+    <img :src="Destination.Image" alt=""/>
     <button @click="viewspace">View</button>
   </div>
 </template>
