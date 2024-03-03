@@ -2,7 +2,7 @@
   <div>
     <h1>{{ Destination.Name }}</h1>
     <img :src="Destination.Image" alt=""/>
-    <button @click="viewspace">View</button>
+    <router-link to="/Milotic">View</router-link>
   </div>
 </template>
 
